@@ -9,6 +9,14 @@ const PlaceholderImage = require('@/assets/images/background-image.png');
 
 export default function ImagePickerScreen() {
     const [selectedImages, setSelectedImages] = useState<[string | undefined ]>([undefined]);
+
+    // ***NOTE!!!***
+    // If pressing the "Select photos" button does not open the gallery on Android, overwrite the node_modules/expo-image-picker/src/ExponentImagePicker.ts file with the following lines:
+    // import { requireNativeModule } from 'expo-modules-core';
+    // export default requireNativeModule('ExponentImagePicker');
+    //
+    // ExponentImagePicker.ts should NOT include NativeModulesProxy, or Android usage of ImagePicker component may not work
+
     const pickImageAsync = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             allowsEditing: false,
